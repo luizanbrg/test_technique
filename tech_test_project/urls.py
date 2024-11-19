@@ -20,11 +20,16 @@ from django.urls import path, include
 from tournament.api import viewsets as teamsviewsets
 from rest_framework import routers
 
+from tournament import views
+
 router = routers.DefaultRouter()
 
-router.register(r'teams', teamsviewsets.TeamViewSet, basename='Teams')
+router.register(r'api/teams', teamsviewsets.TeamViewSet, basename='Teams')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('homepage/', views.homepage, name='homepage'),
+    path('teams/', views.teams, name='teams'),
 ]
