@@ -5,30 +5,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Teams List</title>
+    <title>Players List</title>
     {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
-    <section id="teams-list-section">
+    <section id="players-list-section">
       <div class="container mt-5">
-        <h1 class="mb-4 text-center">Teams List</h1>
+        <h1 class="mb-4 text-center">Players List</h1>
         <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">City</th>
+              <th scope="col">Team</th>
+              <th scope="col">Position</th>
             </tr>
           </thead>
           <tbody>
-            {% for team in teams %}
+            {% for player in players %}
             <tr>
-              <td>{{ team.name }}</td>
-              <td>{{ team.city }}</td>
+              <td>{{ player.name }}</td>
+              <td>{{ player.team }}</td>
+              <td>{{ player.position }}</td>
             </tr>
             {% empty %}
             <tr>
-              <td colspan="2" class="text-center">No teams available</td>
+              <td colspan="2" class="text-center">No players available</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -36,15 +38,14 @@
       </div>
     </section>
 
-    <section id="add-team-section">
+    <section id="add-player-section">
       <div class="container mt-5 d-flex flex-column align-items-center">
         {% if submitted %}
-        <p>Your team was successfully submitted! 😁⚽️</p>
+        <p>The player was successfully submitted! 😁⚽️</p>
 
         {% else %}
-        <h2>Add a new team</h2>
-        <form action="{% url 'teams' %}" method="POST" class="w-50">
-          <!-- je do</form>is me rappeler que url teams appelle la vue teams, où est la logique du forms -->
+        <h2>Add a new player</h2>
+        <form action="{% url 'players' %}" method="POST" class="w-50">
           {% csrf_token %} {{ form.as_p }}
           <input type="submit" value="Submit" class="btn btn-secondary" />
         </form>

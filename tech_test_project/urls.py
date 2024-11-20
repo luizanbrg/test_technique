@@ -25,11 +25,13 @@ from tournament import views
 router = routers.DefaultRouter()
 
 router.register(r'api/teams', teamsviewsets.TeamViewSet, basename='Teams')
+router.register(r'api/players', teamsviewsets.TeamViewSet, basename='Players')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
-    path('homepage/', views.homepage, name='homepage'),
+    path('api/', include(router.urls)),
+    path('', views.homepage, name='homepage'),
     path('teams/', views.teams, name='teams'),
+    path('players/', views.players, name='players'),
 ]
