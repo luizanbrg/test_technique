@@ -30,6 +30,7 @@ class ModelTestCase(TestCase):
         #10 sinon l'exception est levée à chaque fois
         with self.assertRaises(ValidationError):
             player = Player(name="Player 11", position=self.position, team=self.team)
+            player.full_clean()
             player.save()
 
     def test_player_belongs_to_team(self):

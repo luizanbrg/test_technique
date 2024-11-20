@@ -1,20 +1,26 @@
 from rest_framework import serializers
-from tournament import models
+from ..models import Player, Team, Position
 
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Team
+        model = Team
         fields = '__all__'
 
 
 class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Player
+        model = Player
         fields = '__all__'
 
+    def validate(self, data):
+        team = data.get('team')
 
+        if team and team.player_set.count() >= 11:
+            raise serializers.ValidationError('A team cannot have more than 11 players.')
+
+        return data
 
 class PositionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Position
+        model = Position
         fields = '__all__'
