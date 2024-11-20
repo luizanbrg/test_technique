@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Players List</title>
+    {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <section id="players-list-section">
+      <div class="container mt-5">
+        <h1 class="mb-4 text-center">Players List</h1>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Team</th>
+              <th scope="col">Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for player in players %}
+            <tr>
+              <td>{{ player.name }}</td>
+              <td>{{ player.team }}</td>
+              <td>{{ player.position }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="2" class="text-center">No players available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="add-player-section" class="pb-3">
+      <div class="container mt-5 d-flex flex-column align-items-center">
+        {% if submitted %}
+        <p>The player was successfully submitted! 😁⚽️</p>
+
+        {% else %}
+        <h2>Add a new player</h2>
+        <form action="{% url 'players' %}" method="POST" class="w-50">
+          {% csrf_token %} {{ form.as_p }}
+          <input type="submit" value="Submit" class="btn btn-secondary" />
+        </form>
+        {% endif %}
+      </div>
+    </section>
+  </body>
+</html>
