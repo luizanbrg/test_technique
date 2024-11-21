@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
-    {% block content %}{% endblock %}
+    <div class="container mr-3"></div>
+    {% include 'navbar.html' %} {% block content %} {% endblock %}
   </body>
 </html>

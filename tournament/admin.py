@@ -17,5 +17,5 @@ class PositionAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'city']
 
 @admin.register(Match)
-class PositionAdmin(admin.ModelAdmin):
+class MatchAdmin(admin.ModelAdmin):
     list_display = ['id', 'team1_id', 'team2_id', 'team1_goals', 'team2_goals']

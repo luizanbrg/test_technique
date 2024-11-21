@@ -36,8 +36,26 @@ class Player(models.Model):
         return self.name
 
 class Match(models.Model):
-    team1_id = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='team1')
-    team2_id = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='team2')
-    #j'ai opté pour une FK pour permettre aux équipes de jouer plusieurs matchs l'une contre l'autre, avec un OneToOneField, on ne peut pas faire ça
+    team1 = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='team1')
+    team2 = models.ForeignKey(Team, on_delete=models.PROTECT, related_name='team2')
     team1_goals = models.PositiveIntegerField(default=0)
     team2_goals = models.PositiveIntegerField(default=0)
+
+    def clean(self):
+        if self.team1 == self.team2:
+            raise ValidationError("A team cannot play against itself")
+
+    def save(self, *args, **kwargs):
+        if Match.objects.filter(team1=self.team1, team2=self.team2).exists() or Match.objects.filter(team1=self.team2, team2=self.team1).exists():
+            raise ValueError("Two teams can't play twice against each other") #par les querysets, python ira chercher dans la db si cette combination d'equipes existe déjà, et ce dans les deux sens que ce soit team1 = equipeA versus team2 = equipeB ou team1 = equipeB versus team2 = equipeA
+        super().save(*args, **kwargs)
+        self.match_stats() #je rappelle la methode cree sur le viewset pour calculer les stats des equipes après un match
+
+    #ici j'importe la methode du viewset pour l'utiliser
+    def match_stats(self):
+        from tournament.api.viewsets import MatchViewSet
+        match_viewset = MatchViewSet()
+        match_viewset.match_stats(self)
+
+    def __str__(self):
+        return f"{self.team1.name} against {self.team2.name}"
