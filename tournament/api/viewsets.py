@@ -9,14 +9,10 @@ class TeamViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TeamSerializer
     queryset = models.Team.objects.all()
 
-    # def get_ranking(self, request):
-    #     teams = models.Team.objects.all().order_by('points')
-    #     serializer = TeamSerializer(teams, many=True)
-    #     return Response(serializer.data)
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
-    serializer_class = serializers.TeamSerializer
+    serializer_class = serializers.PlayerSerializer
     queryset = models.Player.objects.all()
 
 class MatchViewSet(viewsets.ModelViewSet):
