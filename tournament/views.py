@@ -5,8 +5,8 @@ from django.shortcuts import render
 from .models import Team, Player, Match
 from .forms import TeamForm, PlayerForm
 from django.http import HttpResponseRedirect
-from .documents import PlayersDocument
-from elasticsearch_dsl import MultiMatch
+from .documents import PlayersDocument, TeamsDocument
+from elasticsearch_dsl import MultiSearch
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -51,11 +51,13 @@ def ranking(request):
     teams_list = Team.objects.all().order_by('-points', '-kills_marked')
     return render(request, 'ranking.html', {'teams': teams_list})
 
-def index(request):
-    q = request.GET.get("q")
-    context = {}
-    if q:
-        query = MultiMatch(query=q, fields=["name", "position"], fuzziness="AUTO")
-        s = PlayersDocument.search().query(query)[0:5]
-        context["players"] = s
-    return render(request, "index.html", context)
+# def index(request):
+#     q = request.GET.get("q")
+#     context = {}
+#     if q:
+#         query = MultiSearch(query=q, fields=["name", "position"], fuzziness="AUTO")
+#         players_search = PlayersDocument.search().query(query)
+#         teams_search = TeamsDocument.search().query(query)
+#         context["players"] = players_search
+#         context["teams"] = teams_search
+#     return render(request, "index.html", context)
