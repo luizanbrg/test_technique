@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 from tournament.api import viewsets as teamsviewsets
+from tournament.api import viewsets as playersviewsets
+from tournament.api import viewsets as matchesviewsets
+
 from rest_framework import routers
 
 from tournament import views
@@ -25,7 +28,8 @@ from tournament import views
 router = routers.DefaultRouter()
 
 router.register(r'teams', teamsviewsets.TeamViewSet, basename='Teams')
-router.register(r'players', teamsviewsets.TeamViewSet, basename='Players')
+router.register(r'players', playersviewsets.PlayerViewSet, basename='Players')
+router.register(r'matches', matchesviewsets.MatchViewSet, basename='Matches')
 
 
 urlpatterns = [

@@ -14,7 +14,8 @@ class TeamViewSet(viewsets.ModelViewSet):
     #     serializer = TeamSerializer(teams, many=True)
     #     return Response(serializer.data)
 
-class ViewSet(viewsets.ModelViewSet):
+
+class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TeamSerializer
     queryset = models.Player.objects.all()
 
@@ -31,18 +32,15 @@ class MatchViewSet(viewsets.ModelViewSet):
 
     #méthode créé au cas où un match soit créé avec des erreurs de score, comme ça on peut le mettre à jour
     def update(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)
+        response = super().update(request, *args, **kwargs)
         match = self.get_object()
         self.match_stats(match)
         return response
 
     #methode où on calcule les stats des équipes après un match
     def match_stats(self, match):
-        team1 = match.team1_id
-        team2 = match.team2_id
-
-        if team1 == team2:
-            return Response({'error': 'This is not possible, a team has to play against another team'}, status=status.HTTP_400_BAD_REQUEST)
+        team1 = match.team1
+        team2 = match.team2
 
         #si les deux équipes sont différentes, on peut continuer
         team1.kills_marked += match.team1_goals #buts marqués par l'équipe 1
@@ -57,6 +55,9 @@ class MatchViewSet(viewsets.ModelViewSet):
         else:
             team1.points += 1
             team2.points += 1
+
+        if team1 == team2:
+            return Response({'error': 'This is not possible, a team has to play against another team'}, status=status.HTTP_400_BAD_REQUEST)
 
         team1.save()
         team2.save()
