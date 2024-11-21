@@ -532,14 +532,14 @@ class PlayerForm(forms.ModelForm):
 
 ### **Conclusion**
 
-Ces formulaires fournissent une base solide pour gérer les données utilisateur tout en offrant des interfaces conviviales grâce à l’intégration de Bootstrap et aux personnalisations appliquées. Leur structure flexible permet de les adapter facilement à des besoins spécifiques ou à d'autres modèles de l'application.
+- Ces formulaires fournissent une base solide pour gérer les données utilisateur tout en offrant des interfaces conviviales grâce à l’intégration de Bootstrap et aux personnalisations appliquées. Leur structure flexible permet de les adapter facilement à des besoins spécifiques ou à d'autres modèles de l'application.
 ---
 
 ## 🔍 **À Améliorer**
 
 - **Tests automatisés :** Certains tests peuvent être améliorés, notamment ceux liés aux serializers.
 - **Personnalisation de l'interface utilisateur :** Ajouter un design plus détaillé.
-- Implémentation d'**Elastic Search** pour permettre la recherche par noms d'équipes de de joueurs
+- Finir l'implémentation d'**Elastic Search** pour permettre la recherche par noms d'équipes et de joueurs/positions. 
 - Déploiement et dockerisation 
 
 ---
@@ -550,6 +550,7 @@ Ces formulaires fournissent une base solide pour gérer les données utilisateur
 - Utilisation de modèles, vues et templates pour construire une architecture MVC (Model-View-Controller).
 - Développement d'une interface utilisateur simple et fonctionnelle.
 - Un peu sur football car je ne savais pas ce que 'kills' signifiait. 😂
+- Un peu de Docker et Elastic Search. J'ai créé un container sur Docker pour la première fois !
 
 ---
 
