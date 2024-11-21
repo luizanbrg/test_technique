@@ -6,6 +6,7 @@ from .models import Team, Player, Match
 from .forms import TeamForm, PlayerForm
 from django.http import HttpResponseRedirect
 from .documents import PlayersDocument
+from elasticsearch_dsl import MultiMatch
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -50,11 +51,11 @@ def ranking(request):
     teams_list = Team.objects.all().order_by('-points', '-kills_marked')
     return render(request, 'ranking.html', {'teams': teams_list})
 
-def elastic_search(request):
+def index(request):
     q = request.GET.get("q")
     context = {}
     if q:
-
-        search = PlayersDocument.search().query("match", position=q)
-        context["players"] = search
+        query = MultiMatch(query=q, fields=["name", "position"], fuzziness="AUTO")
+        s = PlayersDocument.search().query(query)[0:5]
+        context["players"] = s
     return render(request, "index.html", context)

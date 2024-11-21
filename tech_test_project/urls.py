@@ -38,4 +38,5 @@ urlpatterns = [
     path('teams/', views.teams, name='teams'),
     path('players/', views.players, name='players'),
     path('ranking/', views.ranking, name='ranking'),
+    path('index/', views.index, name='index'),
 ]
