@@ -1,1 +1,49 @@
-<h1>oi</h1>
+{% extends 'base.html' %} {% block title %}Players List{% endblock %} {% block content %}
+
+<section id="cards">
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">Welcome to my website! ☺️</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="max-width: 280px; transform: scale(0.9)">
+          <img src="../static/images/ranking.png" class="card-img-top" alt="Ranking" />
+          <div class="card-body">
+            <h5 class="card-title"><a href="/ranking" class="text-decoration-none">Ranking</a></h5>
+            <p class="card-text">After a crazy season, the final ranking is...</p>
+          </div>
+          <div class="card-footer">
+            <a href="/ranking" class="btn btn-secondary">Go to Ranking</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="max-width: 280px; transform: scale(0.9)">
+          <img src="../static/images/ranking.png" class="card-img-top" alt="Players" />
+          <div class="card-body">
+            <h5 class="card-title"><a href="/players" class="text-decoration-none">Players</a></h5>
+            <p class="card-text">Here you can check all the players in the db and add new ones</p>
+          </div>
+          <div class="card-footer">
+            <a href="/players" class="btn btn-secondary">Go to Players</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col d-flex justify-content-center">
+        <div class="card" style="max-width: 280px; transform: scale(0.9)">
+          <img src="../static/images/ranking.png" class="card-img-top" alt="Teams" />
+          <div class="card-body">
+            <h5 class="card-title"><a href="/teams" class="text-decoration-none">Teams</a></h5>
+            <p class="card-text">Here you can check the scores of each team and add new ones</p>
+          </div>
+          <div class="card-footer">
+            <a href="/teams" class="btn btn-secondary">Go to Teams</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -7,7 +7,7 @@ class TeamForm(forms.ModelForm):
     class Meta:
         model = Team
         fields = '__all__'
-        exclude = ['id']
+        exclude = ['id', 'points', 'kills_received', 'kills_marked']
 
         labels = {
             'name': 'Team Name',
