@@ -1,6 +1,6 @@
 # **Tournoi de Football - Documentation GitHub**
 
-Bienvenue dans la documentation de **My Django App**, mon premier projet fait sur le framework Django, où j'ai également utilisé la bibliothèque Django Rest Framework (DRF). Cette application a été faite dans un cadre d'apprentissage, où tout les concepts ont été nouveaus pour moi et je disposais de seulement 3 jours pour tout faire. 🌐✨
+Bienvenue dans la documentation de **Mon Tournoi de Football**, mon premier projet fait sur le framework Django, où j'ai également utilisé la bibliothèque Django Rest Framework (DRF). Cette application a été faite dans un cadre d'apprentissage, où tout les concepts ont été nouveaus pour moi et je disposais de seulement 3 jours pour tout faire. 🌐✨
 
 Cette application a été développée dans un but éducatif, en utilisant des bonnes pratiques du développement Django et des outils associés pour mieux comprendre l'architecture d'un projet Django, ce qui s'est avéré pas si difficile pour moi grâce aux enormes ressemblances de ce framework à Ruby on Rails, que j'ai déjà eu le plaisir d'utiliser dans le passé. 🎮🐍
 
