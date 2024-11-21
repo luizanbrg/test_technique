@@ -70,3 +70,29 @@ class MatchTestCase(TestCase):
         match = Match(team1=self.team1, team2=self.team1)
         with self.assertRaises(ValidationError):
             match.full_clean()
+
+    def test_match_results(self):
+        match = Match.objects.create(team1=self.team1, team2=self.team2, team1_goals=3, team2_goals=1)
+
+        self.team1.refresh_from_db()
+        self.team2.refresh_from_db()
+
+        self.assertEqual(self.team1.points, 3)
+        self.assertEqual(self.team2.points, 0)
+        self.assertEqual(self.team1.kills_marked, 3)
+        self.assertEqual(self.team1.kills_received, 1)
+        self.assertEqual(self.team2.kills_marked, 1)
+        self.assertEqual(self.team2.kills_received, 3)
+
+    def test_draw_match(self):
+        match = Match.objects.create(team1=self.team1, team2=self.team2, team1_goals=2, team2_goals=2)
+
+        self.team1.refresh_from_db()
+        self.team2.refresh_from_db()
+
+        self.assertEqual(self.team1.points, 1)
+        self.assertEqual(self.team2.points, 1)
+        self.assertEqual(self.team1.kills_marked, 2)
+        self.assertEqual(self.team1.kills_received, 2)
+        self.assertEqual(self.team2.kills_marked, 2)
+        self.assertEqual(self.team2.kills_received, 2)
