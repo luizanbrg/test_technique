@@ -2,18 +2,14 @@
 # # Create your views here.
 
 from django.shortcuts import render
-from .models import Team
-from .models import Player
-from .forms import TeamForm
-from .forms import PlayerForm
+from .models import Team, Player, Match
+from .forms import TeamForm, PlayerForm
 from django.http import HttpResponseRedirect
 
 def homepage(request):
     return render(request, 'homepage.html')
 
-
 def teams(request):
-
     #logique du forms pour add une equipe
     submitted = False
     if request.method == 'POST':
@@ -27,10 +23,10 @@ def teams(request):
             submitted = True
             #le but de ce code est de vérifier si l'utilisateur a le 'submitted' dans l'url, si oui, on change la valeur de submitted à True
 
-
     #lister toutes les equipes
     teams_list = Team.objects.all()
     return render(request, 'teams.html', {'teams': teams_list, 'form': form, 'submitted': submitted}) #le submitted ici va passer la variable submitted à la page teams.html
+
 
 def players(request):
 
@@ -47,3 +43,8 @@ def players(request):
 
     players_list = Player.objects.all()
     return render(request, 'players.html', {'players': players_list, 'form': form, 'submitted': submitted})
+
+def ranking(request):
+
+    teams_list = Team.objects.all().order_by('-points', '-kills_marked')
+    return render(request, 'ranking.html', {'teams': teams_list})
