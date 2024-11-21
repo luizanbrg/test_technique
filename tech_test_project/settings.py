@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'tournament',
     'bootstrap5',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,11 @@ DATABASES = {
     }
 }
 
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': os.getenv('ELASTICSEARCH_HOST'),
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

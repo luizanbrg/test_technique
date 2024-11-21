@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .models import Team, Player, Match
 from .forms import TeamForm, PlayerForm
 from django.http import HttpResponseRedirect
+from .documents import PlayersDocument
 
 def homepage(request):
     return render(request, 'homepage.html')
@@ -48,3 +49,12 @@ def ranking(request):
 
     teams_list = Team.objects.all().order_by('-points', '-kills_marked')
     return render(request, 'ranking.html', {'teams': teams_list})
+
+def elastic_search(request):
+    q = request.GET.get("q")
+    context = {}
+    if q:
+
+        search = PlayersDocument.search().query("match", position=q)
+        context["players"] = search
+    return render(request, "index.html", context)
