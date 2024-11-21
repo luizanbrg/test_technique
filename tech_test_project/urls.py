@@ -24,8 +24,8 @@ from tournament import views
 
 router = routers.DefaultRouter()
 
-router.register(r'api/teams', teamsviewsets.TeamViewSet, basename='Teams')
-router.register(r'api/players', teamsviewsets.TeamViewSet, basename='Players')
+router.register(r'teams', teamsviewsets.TeamViewSet, basename='Teams')
+router.register(r'players', teamsviewsets.TeamViewSet, basename='Players')
 
 
 urlpatterns = [
@@ -34,4 +34,5 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('teams/', views.teams, name='teams'),
     path('players/', views.players, name='players'),
+    path('ranking/', views.ranking, name='ranking'),
 ]
