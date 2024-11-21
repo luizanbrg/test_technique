@@ -547,7 +547,7 @@ class PlayerForm(forms.ModelForm):
 ## 🏆 **Résultats d'Apprentissage**
 
 - Apprentissage du framework Django, qui a été très enrichissante. Je compte continuer à me former sur ce framework, c'était agréable d'utiliser un framework avec une organisation intuitive tout comme que Ruby on Rails. 
-- Utilisation de modèles, vues et templates pour construire une architecture MVC (Model-View-Controller).
+- Utilisation de modèles, vues et templates pour construire une architecture MVC (Model-View-Controller), sachant que les Controller en Django sont des Viewsets/Views, mais la logique se garde.
 - Développement d'une interface utilisateur simple et fonctionnelle.
 - Un peu sur football car je ne savais pas ce que 'kills' signifiait. 😂
 - Un peu de Docker et Elastic Search. J'ai créé un container sur Docker pour la première fois !
